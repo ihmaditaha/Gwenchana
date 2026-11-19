@@ -94,60 +94,60 @@ else:
     st.error("Trained model not found.")
 
 
-METRICS_PATH = BASE_DIR / "reports" / "metrics.json"
+# METRICS_PATH = BASE_DIR / "reports" / "metrics.json"
 
-with open(METRICS_PATH, "r") as file:
-    metrics = json.load(file)
-
-
-st.header("Model Performance Metrics")
-
-col1, col2, col3, col4, col5 = st.columns(5)
-
-col1.metric("Accuracy", f"{metrics['accuracy']:.2%}")
-col2.metric("Precision", f"{metrics['precision']:.2%}")
-col3.metric("Recall", f"{metrics['recall']:.2%}")
-col4.metric("F1-Score", f"{metrics['f1_score']:.2%}")
-col5.metric("ROC-AUC", f"{metrics['roc_auc']:.2%}")
+# with open(METRICS_PATH, "r") as file:
+#     metrics = json.load(file)
 
 
-st.header("Classification Report")
+# st.header("Model Performance Metrics")
 
-report = metrics["classification_report"]
+# col1, col2, col3, col4, col5 = st.columns(5)
 
-class_report = {
-    "Low": report["Low"],
-    "Medium": report["Medium"],
-    "High": report["High"],
-}
-
-report_df = pd.DataFrame(class_report).T
-
-st.dataframe(
-    report_df.style.format(
-        {
-            "precision": "{:.2%}",
-            "recall": "{:.2%}",
-            "f1-score": "{:.2%}",
-            "support": "{:.0f}",
-        }
-    ),
-    use_container_width=True,
-)
+# col1.metric("Accuracy", f"{metrics['accuracy']:.2%}")
+# col2.metric("Precision", f"{metrics['precision']:.2%}")
+# col3.metric("Recall", f"{metrics['recall']:.2%}")
+# col4.metric("F1-Score", f"{metrics['f1_score']:.2%}")
+# col5.metric("ROC-AUC", f"{metrics['roc_auc']:.2%}")
 
 
-st.header("Confusion Matrix")
+# st.header("Classification Report")
 
-CONFUSION_MATRIX_PATH = BASE_DIR / "reports" / "confusion_matrix.png"
+# report = metrics["classification_report"]
 
-if CONFUSION_MATRIX_PATH.exists():
-    col1, col2, col3 = st.columns([1, 2, 1])
+# class_report = {
+#     "Low": report["Low"],
+#     "Medium": report["Medium"],
+#     "High": report["High"],
+# }
 
-    with col2:
-        st.image(
-            str(CONFUSION_MATRIX_PATH),
-            caption="Confusion Matrix - Test Set",
-            use_container_width=True,
-        )
-else:
-    st.error("Confusion Matrix image not found.")
+# report_df = pd.DataFrame(class_report).T
+
+# st.dataframe(
+#     report_df.style.format(
+#         {
+#             "precision": "{:.2%}",
+#             "recall": "{:.2%}",
+#             "f1-score": "{:.2%}",
+#             "support": "{:.0f}",
+#         }
+#     ),
+#     use_container_width=True,
+# )
+
+
+# st.header("Confusion Matrix")
+
+# CONFUSION_MATRIX_PATH = BASE_DIR / "reports" / "confusion_matrix.png"
+
+# if CONFUSION_MATRIX_PATH.exists():
+#     col1, col2, col3 = st.columns([1, 2, 1])
+
+#     with col2:
+#         st.image(
+#             str(CONFUSION_MATRIX_PATH),
+#             caption="Confusion Matrix - Test Set",
+#             use_container_width=True,
+#         )
+# else:
+#     st.error("Confusion Matrix image not found.")
